@@ -1,3 +1,8 @@
+// ================================
+//final int AMMO = 0;
+final int HEALTH = 1;
+final int GUN = 2;
+
 //modes ============================
 int mode = 0;
 final int intro = 1;
@@ -20,7 +25,7 @@ color dblue = #1A3037, blue = #1DB7F2;
 color lyellowg = #D7E3A1, dyellowg = #B6C17D;
 color black = #030C12;
 color dpurple = #2E2F51, lpurple = #8C7CA8;
-color dbrown = #1C1912, mbrown = #4D4035;
+color dbrown = #1C1912, mbrown = #4D4035, yellow = #EAE128;
 color mgrey = #5A4F55, white = #FFFFFF;
 color e = #ff8100, f = #842555, t = #002fff;
 
@@ -42,7 +47,13 @@ ArrayList<Darkness> darkness;
 Darkness lightlayer;
 
 int imtimer;
-PImage eb;
+
+// ======================================
+PImage turret;
+
+// =====================================
+gif u1, d1, l1, r1;
+PImage shotgun, fireball, fireball1, ;
 
 void setup() {
   size(800, 600, P2D);
@@ -51,12 +62,19 @@ void setup() {
   textAlign(CENTER, CENTER);
 
   //gif =====================
-  g_l = new gif(3, "level/", "_delay-0.2s.gif", width/4, height/2, 300, height, 3);
-  gi = new gif(33, "intro/", "_delay-0.08s.gif", width/2, height/2, 850, 850, 5);
+  g_l = new gif(3, "level/frame_", "_delay-0.2s.gif", width/4, height/2, 300, height, 3);
+  gi = new gif(33, "intro/frame_", "_delay-0.08s.gif", width/2, height/2, 850, 850, 5);
 
   //button =============================
   buttoni = new Button("Start", width/2, 500, 200, 80, dblue, lyellowg);
 
+
+  //player =================================================
+  u1 = new gif(4, "man/up/sprite_", ".png", 5);
+  d1 = new gif(4, "man/down/sprite_", ".png", 5);
+  l1 = new gif(4, "man/left/sprite_", ".png", 5);
+  r1 = new gif(4, "man/right/sprite_", ".png", 5);
+  
   //objs ========================
   myObjects = new ArrayList<GameObject>();
   pp = loadImage("pp.png");
@@ -70,7 +88,7 @@ void setup() {
 
   // map ========================
   map = loadImage("map1.png");
-  bg = loadImage("aa.jpg");
+  bg = loadImage("floor.jpg");
   floor = loadImage("floor1.jpg");
 
   //darkness =====================
@@ -83,19 +101,23 @@ void setup() {
     color Rcolor = map.get(x, y);
     if (Rcolor == e) {
       for (int i = 0; i < 2; i++) 
-      myObjects.add(new boom(x, y));
+        myObjects.add(new boom(x, y));
     }
     if (Rcolor == f) myObjects.add(new follower(x, y));
-    if (Rcolor == t) myObjects.add(new turret(x, y));
+    if (Rcolor == t) {
+      for (int i = 0; i < 4; i++) myObjects.add(new turret(x, y));
+    }
     x++;
     if (x == map.width) {
       x = 0;
       y++;
     }
   }
-  
-  
-  eb = loadImage("eb.png");
+
+  //==================================================
+  turret = loadImage("turret.png");
+
+
 }
 
 void draw() {

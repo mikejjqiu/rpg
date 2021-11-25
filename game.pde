@@ -22,7 +22,7 @@ void room() {
   strokeWeight(3);
   fill(mgrey);
   image(bg, width/2, height/2, width, height);
-  stroke(#838FCE);
+  stroke(#5C6463);
   line(0, 0, width, height);
   line(width, 0, 0, height);
 
@@ -75,6 +75,7 @@ void minimap() {
   while (y <= map.height) {
     color c = map.get(x, y);
     fill(c, 150);
+    noStroke();
     square(x1, y1, size);
     x++;
     x1 += size;

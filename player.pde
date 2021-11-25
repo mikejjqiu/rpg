@@ -2,7 +2,7 @@ class player extends GameObject {
 
   float speed;
   weapon myWeapon;
-
+  gif curAct;
 
   player() {
     super();
@@ -10,24 +10,19 @@ class player extends GameObject {
     roomX = 1;
     roomY = 1;
     hp = 100;
-    size = 47;
-    myWeapon = new pistol();
+    size = 50;
+    myWeapon = new fireball2();
+    curAct = d1;
   }
 
   void show() {
-    fill(white);
-    circle(loc.x+1, loc.y, 40);
-    image(pp, loc.x-8, loc.y-3, 60, 54);
+
+    curAct.show1(loc.x, loc.y, size/1.5, size);
   }
 
   void act() {
     super.act();
     movement();
-    if (space&&up) loc.y-=speed;
-    if (space&&down) loc.y+=speed;
-    if (space&&left) loc.x-=speed;
-    if (space&&right) loc.x+=speed;
-    v.limit(speed);
 
     checkExit();
 
@@ -68,6 +63,14 @@ class player extends GameObject {
       if (myObj instanceof follower && colliding(myObj)) {
         hp -= 1;
       }
+
+      if (myObj instanceof DroppedItem && colliding(myObj)) {
+        DroppedItem item = (DroppedItem) myObj;
+        if (item.type == GUN) {
+          myWeapon = item.w;
+          item.hp = 0;
+        }
+      }
     }
   }
 
@@ -101,13 +104,45 @@ class player extends GameObject {
   }
 
   void movement() {
-    if (up) v.y = -speed;
-    if (down) v.y = speed;
-    if (left) v.x = -speed;
-    if (right) v.x = speed;
+    v.limit(speed);
+    if (up) {
+      v.y = -speed;
+      curAct = u1;
+    }
+    if (down) {
+      v.y = speed;      
+      curAct = d1;
+    }
+    if (left) {
+      v.x = -speed;      
+      curAct = l1;
+    }
+    if (right) {
+      v.x = speed;      
+      curAct = r1;
+    }
 
+    //if (abs(v.y) > abs(v.y)) {
+    //  if (v.y>=0) curAct = d1;
+    //  else curAct = u1;
+    //} else {
+    //  if (v.x > 0) curAct = r1;
+    //  else curAct = l1;
+    //}
 
     if (!up && !down) v.y = 0;
     if (!left && !right) v.x = 0;
   }
+}
+
+
+void Hbar() {
+  rectMode(CENTER);
+  fill(red);
+  rect(myPlayer.loc.x, myPlayer.loc.y-40, 50, 10);
+
+  fill(green);
+
+  //float x = map(
+  //  rect(myPlayer.loc.x, myPlayer.loc.y-40, x, 10);
 }

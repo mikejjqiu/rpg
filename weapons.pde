@@ -1,6 +1,7 @@
 class fireball extends weapon {
   fireball() {
-    super(10, 2, mred, 30);
+    super(20, 2, mred, 30);
+    explode(
   }
 }
 

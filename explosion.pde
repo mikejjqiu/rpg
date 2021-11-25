@@ -7,7 +7,7 @@ class explosion extends GameObject {
     hp = 1;
     loc = new PVector (x, y);
     v = new PVector (random(-3, 3), random(-3, 3));
-    v.rotate(random(-PI, PI));
+    v.rotate(random(-1, 1));
     roomX = myPlayer.roomX;
     roomY = myPlayer.roomY;
     size = s1;
@@ -16,6 +16,7 @@ class explosion extends GameObject {
 
   void show() {
     colors();
+    noStroke();
     square(loc.x, loc.y, int(random(size-10, size+10)));
   }
 
@@ -27,7 +28,7 @@ class explosion extends GameObject {
     if (loc.y <= height*0.1) loc.y = height*0.1;
     if (loc.y >= height*0.9) loc.y = height*0.9;
 
-    tt = tt - 100/size;
+    tt = tt - 80/size;
     if (tt <= 0) hp = 0;
   }
 
@@ -40,6 +41,9 @@ class explosion extends GameObject {
 
     if (c == 3)
       fill(random(0, tt), random(0, tt), 255, tt);
+      
+    if (c == 4)
+      fill(255, 255, random(0, tt), tt);
   }
 }
 

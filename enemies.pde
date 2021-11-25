@@ -19,8 +19,12 @@ class boom extends enemy {
         timer = 0;
       }
     }
-    if (hp <= 1)
+    if (hp <= 0) 
       explode(20, loc.x, loc.y, 17, 1);
+    else if (d <= size/2+myPlayer.size/2 && imtimer < 180) {
+      explode(20, loc.x, loc.y, 17, 1);
+      hp = 0;
+    }
   }
 }
 
@@ -28,17 +32,17 @@ class boom extends enemy {
 class turret extends enemy {
   int timer = 0;
   turret(int x, int y) {
-    super(200, 50, x, y, black);
+    super(200, 100, x, y, black);
   }
   void show() {
-    super.show();
+    image(turret,loc.x,loc.y,size,size);
   }
   void act() {
     super.collision();
     timer++;
     if (timer==50) {
       PVector aim = new PVector(myPlayer.loc.x-loc.x, myPlayer.loc.y-loc.y);
-      myObjects.add(new ebullet(loc.x, loc.y, aim, 10));
+      myObjects.add(new ebullet(loc.x-1, loc.y-27, aim, 10));
       timer = 0;
     }
   }

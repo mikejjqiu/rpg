@@ -23,6 +23,7 @@ class Darkness {
       float d = dist(myPlayer.loc.x, myPlayer.loc.y, x, y);
       opacity = map(d, 0, 600, 0, 255);
       fill(0, 0, opacity/20, opacity);
+      noStroke();
       square(x, y, size);
       x = x + size;
       if (x >= width) {
