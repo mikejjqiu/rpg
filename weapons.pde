@@ -1,13 +1,12 @@
 class fireball extends weapon {
   fireball() {
     super(20, 2, mred, 30);
-    explode(
   }
 }
 
 class fireball1 extends weapon {
   fireball1() {
-    super(30, 1, red, 50);
+    super(30, 5, red, 50);
   }
   void shoot() {
     if (shottimer >= threshold) {

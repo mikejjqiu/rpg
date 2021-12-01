@@ -1,48 +1,68 @@
 class player extends GameObject {
 
-  float speed;
   weapon myWeapon;
   gif curAct;
 
   player() {
     super();
-    speed = 8;
+    speed = 5;
     roomX = 1;
     roomY = 1;
     hp = 100;
-    size = 50;
-    myWeapon = new fireball2();
-    curAct = d1;
+    size = 80;
+    myWeapon = new shotgun();
+    curAct = rest;
+    maxHP = 100;
   }
+
+
+
 
   void show() {
-
-    curAct.show1(loc.x, loc.y, size/1.5, size);
+    if (curAct == attack) {
+      curAct.show1(loc.x, loc.y, size/1.5, size);
+      int i = 0;
+      i++;
+      if (i>=14) curAct = rest;
+    } else curAct.show1(loc.x, loc.y, size/1.5, size);
+    Hbar();
   }
+
 
   void act() {
     super.act();
     movement();
-
     checkExit();
-
     myWeapon.update();
-    if (mousePressed) myWeapon.shoot();
+    if (mousePressed) {
 
+      for (int i = 0; i<30; i++) {
+        if (i>=29) {
+          myWeapon.shoot(); 
+          print("p");
+        }
+        println(i);
+      }
+      curAct = attack;
+    }
     immunity();
   }
 
-  void immunity() {
 
+
+  void immunity() {
     imtimer++;
     if (imtimer > 180) {
       dmg();
     }
     if (imtimer <= 180) {
-      fill(255, 100);
-      circle(loc.x-1, loc.y, 80);
+      noFill();
+      stroke(dpurple);
+      strokeWeight(3);
+      ellipse(loc.x-1, loc.y, 50, 70);
     }
   }
+
 
   void dmg() {
     for (int i = 0; i < myObjects.size(); i++) {
@@ -69,6 +89,12 @@ class player extends GameObject {
         if (item.type == GUN) {
           myWeapon = item.w;
           item.hp = 0;
+        }
+        if (item.type == HEALTH) {
+          item.hp = 0;
+          hp += 2;
+
+          //if (hp>=110) hp = 110;
         }
       }
     }
@@ -104,22 +130,22 @@ class player extends GameObject {
   }
 
   void movement() {
-    v.limit(speed);
+    v.setMag(speed);
     if (up) {
       v.y = -speed;
-      curAct = u1;
+      //curAct = u1;
     }
     if (down) {
       v.y = speed;      
-      curAct = d1;
+      //curAct = d1;
     }
     if (left) {
       v.x = -speed;      
-      curAct = l1;
+      curAct = l2;
     }
     if (right) {
       v.x = speed;      
-      curAct = r1;
+      curAct = r2;
     }
 
     //if (abs(v.y) > abs(v.y)) {
@@ -132,17 +158,18 @@ class player extends GameObject {
 
     if (!up && !down) v.y = 0;
     if (!left && !right) v.x = 0;
+    if (v.x == 0 && v.y ==0) curAct = rest;
   }
-}
 
 
-void Hbar() {
-  rectMode(CENTER);
-  fill(red);
-  rect(myPlayer.loc.x, myPlayer.loc.y-40, 50, 10);
+  void Hbar() {
+    rectMode(CORNER);
+    fill(red);
+    rect(loc.x-size/2, loc.y-40, 50, 5);
 
-  fill(green);
+    fill(green);
 
-  //float x = map(
-  //  rect(myPlayer.loc.x, myPlayer.loc.y-40, x, 10);
+    float x = map(hp, 0, 100, 0, 50);
+    rect(loc.x-size/2, loc.y-40, x, 5);
+  }
 }

@@ -49,11 +49,16 @@ Darkness lightlayer;
 int imtimer;
 
 // ======================================
-PImage turret;
+PImage turret, fol1, fol2;
 
 // =====================================
 gif u1, d1, l1, r1;
-PImage shotgun, fireball, fireball1, ;
+gif l2, r2, rest, attack;
+
+
+// ===========================
+images shotgun, fireball, fireball1, fireball2, pewpew, pistol;
+PImage shotgun_, fireball_, fireball1_, fireball2_, pewpew_, pistol_;
 
 void setup() {
   size(800, 600, P2D);
@@ -75,9 +80,13 @@ void setup() {
   l1 = new gif(4, "man/left/sprite_", ".png", 5);
   r1 = new gif(4, "man/right/sprite_", ".png", 5);
   
+  l2 = new gif(9, "hero/left/frame_", "_delay-0.07s-PhotoRoom.png", 2);
+  r2 = new gif(9, "hero/right/frame_", "_delay-0.07s-PhotoRoom.png", 2);
+  rest = new gif(12, "hero/rest/frame_", "_delay-0.09s-PhotoRoom.png", 7);
+  attack = new gif(15, "hero/attack/frame_", "_delay-0.04s-PhotoRoom.png", 1);
+
   //objs ========================
   myObjects = new ArrayList<GameObject>();
-  pp = loadImage("pp.png");
   myPlayer = new player();
   myObjects.add(myPlayer);
 
@@ -115,9 +124,18 @@ void setup() {
   }
 
   //==================================================
-  turret = loadImage("turret.png");
+  turret = loadImage("enemy/turret.png");
+  fol1 = loadImage("enemy/f1.png");
+  fol2 = loadImage("enemy/f2.png");
 
 
+  // weapon ============================================
+  shotgun = new images("2", shotgun_);
+  fireball = new images("4", fireball_);
+  fireball1 = new images("4", fireball1_);
+
+
+  //fireball1, fireball2, pewpew, pistol
 }
 
 void draw() {

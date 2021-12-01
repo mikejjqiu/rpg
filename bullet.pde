@@ -13,7 +13,7 @@ class bullet extends GameObject {
     roomX = myPlayer.roomX;
     roomY = myPlayer.roomY;
   }
-  
+
   bullet(PVector loc1, PVector aim1, color c1, int size1) {
     loc = loc1;
     aimVector = aim1;
@@ -25,12 +25,14 @@ class bullet extends GameObject {
     roomY = myPlayer.roomY;
   } 
 
-  
+
 
   void show() {
-    fill(c);
-    noStroke();
-    circle(loc.x, loc.y, size);
+    if (size<40) {
+      fill(c);
+      noStroke();
+      circle(loc.x, loc.y, size);
+    }
   }
 
   void act() {
@@ -41,6 +43,7 @@ class bullet extends GameObject {
       hp = 0;
       explode(20, loc.x, loc.y, 4, 1);
     }
+    explode(3, loc.x, loc.y, 1, 2);
+    if (size>=30) explode(10, loc.x, loc.y, 5, 3);
   }
-  
 }

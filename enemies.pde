@@ -1,7 +1,7 @@
 class boom extends enemy {
   int timer = 0;
   boom(int x, int y) {
-    super(100, 50, x, y, black);
+    super(100, 30, x, y, white);
   }
 
   void show() {
@@ -21,7 +21,7 @@ class boom extends enemy {
     }
     if (hp <= 0) 
       explode(20, loc.x, loc.y, 17, 1);
-    else if (d <= size/2+myPlayer.size/2 && imtimer < 180) {
+    else if (d <= size/2 + myPlayer.size/2 && imtimer < 180) {
       explode(20, loc.x, loc.y, 17, 1);
       hp = 0;
     }
@@ -35,7 +35,7 @@ class turret extends enemy {
     super(200, 100, x, y, black);
   }
   void show() {
-    image(turret,loc.x,loc.y,size,size);
+    image(turret, loc.x, loc.y, size, size);
   }
   void act() {
     super.collision();
@@ -50,10 +50,13 @@ class turret extends enemy {
 
 class follower extends enemy {
   follower(int x, int y) {
-    super(100, 50, x, y, black);
+    super(100, 25, x, y, white);
   }
   void show() {
     super.show();
+
+    if (v.x>0) image(fol1, loc.x-5, loc.y+5, 30, 30);
+    else image(fol2, loc.x-5, loc.y+5, 30, 30);
   }
   void act() {
     super.act();

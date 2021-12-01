@@ -4,31 +4,40 @@ class DroppedItem extends GameObject {
   weapon w;
   color c;
 
-  float r = random(0, 100);
-  PImage shotgun, fireball;
 
   DroppedItem(float x, float y, int rx, int ry) {
-    type = GUN;
+
+    float r1 = random(0, 2);
+    if (r1 > 1) {
+      type = GUN;
+      weapons();
+    }
+
+    if (r1 <= 0.5) type = HEALTH;
+
     hp = 1;
     loc = new PVector(x, y);
     v = new PVector(0, 0);
-    size = 20;
+    size = 30;
     roomX = rx;
     roomY = ry;
     c = yellow;
-
-    weapons();
   }
 
   void show() {
-    stroke(black);
-    strokeWeight(2);
-    fill(c);
+
+    if (type==GUN)fill(c);
+    else if (type==HEALTH)fill(red);
+    else noFill();
+
+    //    stroke(black);
+    //    strokeWeight(2);
     circle(loc.x, loc.y, size);
   }
 
 
   void weapons() {
+    float r = random(0, 100);
     println(r);
     if (r>=55&&r<=80) w = new fireball();
     if (r<=15) w = new pistol();
@@ -39,6 +48,7 @@ class DroppedItem extends GameObject {
   }
 
   void weapon() {
+    float r = random(0, 100);
     if (r>=55&&r<=90) w = new fireball();
     if (r<=15) w = new pistol();
     if (r>15&&r<30) w = new pewpew();

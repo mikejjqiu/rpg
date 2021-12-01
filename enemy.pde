@@ -25,10 +25,12 @@ class enemy extends GameObject {
 
   void show() {
     fill(c);
+    noStroke();
     circle(loc.x, loc.y, size);
-    fill(lyellowg);
-    textSize(20);
-    text(hp, loc.x, loc.y);
+    //fill(lyellowg);
+    
+    //textSize(20);
+    //text(hp, loc.x, loc.y);
   }
 
   void act() {

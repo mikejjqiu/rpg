@@ -3,7 +3,9 @@ class GameObject {
   PVector loc;
   PVector v;
   int hp, size;
+  int maxHP, damage, speed;
   int roomX, roomY;
+  int exp;
 
   GameObject() {
     loc = new PVector(width/2, height/2);
@@ -25,19 +27,13 @@ class GameObject {
 
   // ============================================================
   boolean inRoomWith(GameObject myObj) {
-    if (myObj.roomX == roomX && myObj.roomY == roomY) 
-      return true;
-    else
-      return false;
+    return (myObj.roomX == roomX && myObj.roomY == roomY);
   }
 
 
   // =============================================================
   boolean colliding(GameObject myObj) {
     float d = dist(myObj.loc.x, myObj.loc.y, loc.x, loc.y);
-    if (inRoomWith(myObj) && d < size/2 + myObj.size/2)
-      return true;
-    else
-      return false;
+    return (inRoomWith(myObj) && d < size/2 + myObj.size/2);
   }
 }
