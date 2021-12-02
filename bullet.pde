@@ -43,7 +43,7 @@ class bullet extends GameObject {
       hp = 0;
       explode(20, loc.x, loc.y, 4, 1);
     }
-    explode(3, loc.x, loc.y, 1, 2);
+    explode(1, loc.x, loc.y, 1, 2);
     if (size>=30) explode(10, loc.x, loc.y, 5, 3);
   }
 }

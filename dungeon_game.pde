@@ -67,8 +67,8 @@ void setup() {
   textAlign(CENTER, CENTER);
 
   //gif =====================
-  g_l = new gif(3, "level/frame_", "_delay-0.2s.gif", width/4, height/2, 300, height, 3);
-  gi = new gif(33, "intro/frame_", "_delay-0.08s.gif", width/2, height/2, 850, 850, 5);
+  g_l = new gif(3, "level/frame_", "_delay-0.2s.gif", width/4, height/2, 470, height, 7);
+  gi = new gif(33, "intro/frame_", "_delay-0.08s.gif", width/2, height/2, 850, 850, 4);
 
   //button =============================
   buttoni = new Button("Start", width/2, 500, 200, 80, dblue, lyellowg);
@@ -93,7 +93,7 @@ void setup() {
   myObjects.add(new enemy());
 
   // mode ====================
-  mode = game;
+  mode = pause;
 
   // map ========================
   map = loadImage("map1.png");

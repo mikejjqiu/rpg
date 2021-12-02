@@ -5,7 +5,7 @@ class GameObject {
   int hp, size;
   int maxHP, damage, speed;
   int roomX, roomY;
-  int exp;
+  int xp;
 
   GameObject() {
     loc = new PVector(width/2, height/2);

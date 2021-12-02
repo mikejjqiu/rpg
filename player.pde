@@ -8,11 +8,12 @@ class player extends GameObject {
     speed = 5;
     roomX = 1;
     roomY = 1;
-    hp = 100;
     size = 80;
     myWeapon = new shotgun();
     curAct = rest;
-    maxHP = 100;
+    maxHP = hp = 100;
+    xp = 0;
+    damage = 0;
   }
 
 
@@ -92,9 +93,8 @@ class player extends GameObject {
         }
         if (item.type == HEALTH) {
           item.hp = 0;
-          hp += 2;
-
-          //if (hp>=110) hp = 110;
+          hp += 20;
+          if (hp>maxHP) hp = maxHP;
         }
       }
     }
@@ -131,34 +131,23 @@ class player extends GameObject {
 
   void movement() {
     v.setMag(speed);
-    if (up) {
-      v.y = -speed;
-      //curAct = u1;
-    }
-    if (down) {
-      v.y = speed;      
-      //curAct = d1;
-    }
-    if (left) {
-      v.x = -speed;      
-      curAct = l2;
-    }
-    if (right) {
-      v.x = speed;      
-      curAct = r2;
-    }
+    if (up) v.y = -speed;
+    if (down) v.y = speed;    
+    if (left) v.x = -speed; 
+    if (right) v.x = speed;
 
-    //if (abs(v.y) > abs(v.y)) {
-    //  if (v.y>=0) curAct = d1;
-    //  else curAct = u1;
-    //} else {
-    //  if (v.x > 0) curAct = r1;
-    //  else curAct = l1;
-    //}
+
+    if (abs(v.y) > abs(v.y)) {
+      //if (v.y>=0) curAct = d1;
+      //else curAct = ;
+    } else {
+      if (v.x > 0) curAct = r2;
+      else curAct = l2;
+    }
+    if (v.x == 0 && v.y == 0) curAct = rest;
 
     if (!up && !down) v.y = 0;
     if (!left && !right) v.x = 0;
-    if (v.x == 0 && v.y ==0) curAct = rest;
   }
 
 

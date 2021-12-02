@@ -1,7 +1,7 @@
 class boom extends enemy {
   int timer = 0;
   boom(int x, int y) {
-    super(100, 30, x, y, white);
+    super(100, 30, x, y, white, 5);
   }
 
   void show() {
@@ -32,7 +32,7 @@ class boom extends enemy {
 class turret extends enemy {
   int timer = 0;
   turret(int x, int y) {
-    super(200, 100, x, y, black);
+    super(200, 100, x, y, black, 5);
   }
   void show() {
     image(turret, loc.x, loc.y, size, size);
@@ -50,13 +50,13 @@ class turret extends enemy {
 
 class follower extends enemy {
   follower(int x, int y) {
-    super(100, 25, x, y, white);
+    super(100, 21, x, y, white, 1);
   }
   void show() {
     super.show();
 
     if (v.x>0) image(fol1, loc.x-5, loc.y+5, 30, 30);
-    else image(fol2, loc.x-5, loc.y+5, 30, 30);
+    else image(fol2, loc.x+4, loc.y-4, 30, 30);
   }
   void act() {
     super.act();
