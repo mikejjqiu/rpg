@@ -16,7 +16,7 @@ gif g_l, gi;
 //button ====================
 boolean mouseReleased;
 boolean hadPressed;
-Button buttoni;
+Button buttoni, bHP, bS, bD;
 
 //palette ===================================
 color dgreen = #4a6fa5, mgreen = #3EBC19, green = #19FC0A;
@@ -60,6 +60,8 @@ gif l2, r2, rest, attack;
 images shotgun, fireball, fireball1, fireball2, pewpew, pistol;
 PImage shotgun_, fireball_, fireball1_, fireball2_, pewpew_, pistol_;
 
+PImage ss; 
+
 void setup() {
   size(800, 600, P2D);
   imageMode(CENTER);
@@ -72,14 +74,16 @@ void setup() {
 
   //button =============================
   buttoni = new Button("Start", width/2, 500, 200, 80, dblue, lyellowg);
-
+  bHP = new Button();
+  bS = new Button();
+  bD = new Button();
 
   //player =================================================
   u1 = new gif(4, "man/up/sprite_", ".png", 5);
   d1 = new gif(4, "man/down/sprite_", ".png", 5);
   l1 = new gif(4, "man/left/sprite_", ".png", 5);
   r1 = new gif(4, "man/right/sprite_", ".png", 5);
-  
+
   l2 = new gif(9, "hero/left/frame_", "_delay-0.07s-PhotoRoom.png", 2);
   r2 = new gif(9, "hero/right/frame_", "_delay-0.07s-PhotoRoom.png", 2);
   rest = new gif(12, "hero/rest/frame_", "_delay-0.09s-PhotoRoom.png", 7);
@@ -99,6 +103,8 @@ void setup() {
   map = loadImage("map1.png");
   bg = loadImage("floor.jpg");
   floor = loadImage("floor1.jpg");
+
+  ss = loadImage("11.png");
 
   //darkness =====================
   darkness = new ArrayList<Darkness>();

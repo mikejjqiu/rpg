@@ -6,6 +6,8 @@ void game() {
   minimap();
   hp();
   textAlign(CENTER, CENTER);
+
+  if (key == 'e' || key == 'E') mode = pause;
 }
 
 

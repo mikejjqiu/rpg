@@ -16,6 +16,13 @@ class Button {
     clicked = false;
   }
 
+  Button() {
+    text = "+";
+    highlight = lyellowg;
+    normal = white;
+    clicked = false;
+  }
+
   void show() {
     //rectangle
     rectMode(CENTER);
@@ -37,7 +44,7 @@ class Button {
     }
     textSize(0.7*h);
     fill(255);
-    text(text, x, y-h/10);
+    text(text, x, y);
 
     if (mouseReleased && mouseX > x-w/2 && mouseX < x+w/2 && mouseY > y-h/2 && mouseY < y+h/2) {
       clicked  = true;
@@ -45,4 +52,26 @@ class Button {
       clicked = false;
     }
   }
+
+  void show1(float x1, float y1, int w1) {
+    rectMode(CENTER);
+    textAlign(CENTER, CENTER);
+    fill(black);
+    square(x1+5, y1+5, w1);
+
+    if (mouseX > x1-w1/2 && mouseX < x1+w1/2 && mouseY > y1-w1/2 && mouseY < y1+w1/2) fill(highlight);
+    else fill(normal);
+
+    noStroke();
+    square(x1, y1, w1);
+
+
+    fill(black);
+    textSize(0.8*w1);
+    text(text, x1, y1-3);
+
+    if (mouseReleased && mouseX > x1-w1/2 && mouseX < x1+w1/2 && mouseY > y1-w1/2 && mouseY < y1+w1/2) clicked  = true;
+    else clicked = false;
+  }
+  
 }

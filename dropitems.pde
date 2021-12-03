@@ -30,8 +30,6 @@ class DroppedItem extends GameObject {
     else if (type==HEALTH)fill(red);
     else noFill();
 
-    //    stroke(black);
-    //    strokeWeight(2);
     circle(loc.x, loc.y, size);
   }
 
@@ -48,12 +46,6 @@ class DroppedItem extends GameObject {
   }
 
   void weapon() {
-    float r = random(0, 100);
-    if (r>=55&&r<=90) w = new fireball();
-    if (r<=15) w = new pistol();
-    if (r>15&&r<30) w = new pewpew();
-    if (r>=30&&r<55) w = new shotgun();
-    if (r>90&&r<=100) w = new fireball1();
-    if (r>80&&r<=95)  w = new fireball2();
+    if (GUN == fireball) fireball.show(loc.x, loc.y, size);
   }
 }

@@ -44,7 +44,7 @@ class enemy extends GameObject {
     for (int i = 0; i < myObjects.size(); i++) {
       GameObject myObj = myObjects.get(i);
       if (myObj instanceof bullet && colliding(myObj)) {
-        hp = hp - myObj.size/4 - int(myObj.v.mag()) - damage;
+        hp = hp - myObj.size/4 - int(myObj.v.mag()) - myPlayer.damage;
         myObj.hp = 0;
         if (hp<=0) {
           myObjects.add(new DroppedItem(loc.x, loc.y, roomX, roomY));

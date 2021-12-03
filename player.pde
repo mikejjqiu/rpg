@@ -5,14 +5,14 @@ class player extends GameObject {
 
   player() {
     super();
-    speed = 5;
+    speed = 3;
     roomX = 1;
     roomY = 1;
     size = 80;
     myWeapon = new shotgun();
     curAct = rest;
     maxHP = hp = 100;
-    xp = 0;
+    xp = 30;
     damage = 0;
   }
 
@@ -154,11 +154,11 @@ class player extends GameObject {
   void Hbar() {
     rectMode(CORNER);
     fill(red);
-    rect(loc.x-size/2, loc.y-40, 50, 5);
+    rect(loc.x-size/2, loc.y-40, 50, 4);
 
     fill(green);
 
-    float x = map(hp, 0, 100, 0, 50);
-    rect(loc.x-size/2, loc.y-40, x, 5);
+    float x = map(hp, 0, maxHP, 0, 50);
+    rect(loc.x-size/2, loc.y-40, x, 4);
   }
 }
