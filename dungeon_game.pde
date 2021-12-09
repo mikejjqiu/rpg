@@ -27,7 +27,11 @@ color black = #030C12;
 color dpurple = #2E2F51, lpurple = #8C7CA8;
 color dbrown = #1C1912, mbrown = #4D4035, yellow = #EAE128;
 color mgrey = #5A4F55, white = #FFFFFF;
-color e = #ff8100, f = #842555, t = #002fff;
+
+// ===============================================
+color e = #ff8100, f = #842555, t = #fbff00;
+color heal = #000000;
+color b1 = #0008ff, b2 = #176f11, b3 = #ff0000;
 
 //gameobj ========================
 ArrayList<GameObject> myObjects;
@@ -53,14 +57,15 @@ PImage turret, fol1, fol2;
 
 // =====================================
 gif u1, d1, l1, r1;
-gif l2, r2, rest, attack;
-
+gif boss1, boss2, boss3;
 
 // ===========================
-images shotgun, fireball, fireball1, fireball2, pewpew, pistol;
-PImage shotgun_, fireball_, fireball1_, fireball2_, pewpew_, pistol_;
+images shotgun, fireball, fireball1, fireball2, pewpew, pistol, hh;
+PImage shotgun_, fireball_, fireball1_, fireball2_, pewpew_, pistol_, hh_;
 
-PImage ss; 
+PImage ss, fountain; 
+
+
 
 void setup() {
   size(800, 600, P2D);
@@ -79,28 +84,27 @@ void setup() {
   bD = new Button();
 
   //player =================================================
-  u1 = new gif(4, "man/up/sprite_", ".png", 5);
-  d1 = new gif(4, "man/down/sprite_", ".png", 5);
-  l1 = new gif(4, "man/left/sprite_", ".png", 5);
-  r1 = new gif(4, "man/right/sprite_", ".png", 5);
+  u1 = new gif(3, "hero/hero1/up/", ".png", 8);
+  d1 = new gif(3, "hero/hero1/down/", ".png", 8);
+  l1 = new gif(3, "hero/hero1/left/", ".png", 8);
+  r1 = new gif(3, "hero/hero1/right/", ".png", 8);
 
-  l2 = new gif(9, "hero/left/frame_", "_delay-0.07s-PhotoRoom.png", 2);
-  r2 = new gif(9, "hero/right/frame_", "_delay-0.07s-PhotoRoom.png", 2);
-  rest = new gif(12, "hero/rest/frame_", "_delay-0.09s-PhotoRoom.png", 7);
-  attack = new gif(15, "hero/attack/frame_", "_delay-0.04s-PhotoRoom.png", 1);
+  boss1 = new gif(5, "boss/boss1/frame_", "_delay-0.1s.png", 5);
+  //boss2 = new gif(5, "boss/boss2/frame_", "_delay-0.18s.png", 5);
+  //boss3 = new gif(16, "boss/boss3/frame_", "_delay-0.1s.png", 5);
 
   //objs ========================
   myObjects = new ArrayList<GameObject>();
   myPlayer = new player();
   myObjects.add(myPlayer);
 
-  myObjects.add(new enemy());
+  //myObjects.add(new enemy());
 
   // mode ====================
   mode = pause;
 
   // map ========================
-  map = loadImage("map1.png");
+  map = loadImage("map1(1).png");
   bg = loadImage("floor.jpg");
   floor = loadImage("floor1.jpg");
 
@@ -115,13 +119,22 @@ void setup() {
   while (y < map.height) {
     color Rcolor = map.get(x, y);
     if (Rcolor == e) {
-      for (int i = 0; i < 2; i++) 
+      for (int i = 0; i < 4; i++) 
         myObjects.add(new boom(x, y));
     }
-    if (Rcolor == f) myObjects.add(new follower(x, y));
+    if (Rcolor == f) { 
+      for (int i = 0; i < 5; i++) 
+        myObjects.add(new follower(x, y));
+    }
+
     if (Rcolor == t) {
       for (int i = 0; i < 4; i++) myObjects.add(new turret(x, y));
     }
+
+    if (Rcolor == b1) { 
+      myObjects.add(new boss1(x, y));
+    }
+
     x++;
     if (x == map.width) {
       x = 0;
@@ -133,15 +146,16 @@ void setup() {
   turret = loadImage("enemy/turret.png");
   fol1 = loadImage("enemy/f1.png");
   fol2 = loadImage("enemy/f2.png");
-
+  fountain = loadImage("heal.png");
 
   // weapon ============================================
   shotgun = new images("2", shotgun_);
-  fireball = new images("4", fireball_);
-  fireball1 = new images("4", fireball1_);
-
-
-  //fireball1, fireball2, pewpew, pistol
+  fireball = new images("7", fireball_);
+  fireball1 = new images("6", fireball1_);
+  fireball2 = new images("1", fireball2_);
+  pewpew = new images("5", pewpew_);
+  pistol = new images("3", pistol_);
+  hh = new images("8", hh_);
 }
 
 void draw() {

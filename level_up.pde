@@ -41,8 +41,8 @@ void buttons() {
     myPlayer.hp = myPlayer.maxHP;
   }
 
-  if (bS.clicked == true && myPlayer.xp >= 5 && myPlayer.speed < 8) {
-    myPlayer.xp -= 5;
+  if (bS.clicked == true && myPlayer.xp >= 10 && myPlayer.speed < 6) {
+    myPlayer.xp -= 10;
     myPlayer.speed += 1;
   }
 

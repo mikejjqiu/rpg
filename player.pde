@@ -2,30 +2,29 @@ class player extends GameObject {
 
   weapon myWeapon;
   gif curAct;
+  boolean im, ce;
+  int e = 0;
 
   player() {
     super();
-    speed = 3;
-    roomX = 1;
+    speed = 5;
+    roomX = 7;
     roomY = 1;
-    size = 80;
+    size = 50;
     myWeapon = new shotgun();
-    curAct = rest;
+    curAct = d1;
     maxHP = hp = 100;
     xp = 30;
     damage = 0;
+
+    im = ce = true;
   }
 
 
 
 
   void show() {
-    if (curAct == attack) {
-      curAct.show1(loc.x, loc.y, size/1.5, size);
-      int i = 0;
-      i++;
-      if (i>=14) curAct = rest;
-    } else curAct.show1(loc.x, loc.y, size/1.5, size);
+    curAct.show1(loc.x, loc.y, size/1.5, size);
     Hbar();
   }
 
@@ -33,20 +32,22 @@ class player extends GameObject {
   void act() {
     super.act();
     movement();
-    checkExit();
+
+    droppeditem();
     myWeapon.update();
     if (mousePressed) {
-
-      for (int i = 0; i<30; i++) {
-        if (i>=29) {
-          myWeapon.shoot(); 
-          print("p");
-        }
-        println(i);
-      }
-      curAct = attack;
+      myWeapon.shoot();
     }
-    immunity();
+
+    if (im) immunity();     
+    if (!im) dmg();
+
+    checkExit();
+
+
+    cleanup();
+
+    if (roomX == 8 && roomY == 1 ) im = false; 
   }
 
 
@@ -84,7 +85,12 @@ class player extends GameObject {
       if (myObj instanceof follower && colliding(myObj)) {
         hp -= 1;
       }
+    }
+  }
 
+  void droppeditem() {
+    for (int i = 0; i < myObjects.size(); i++) {
+      GameObject myObj = myObjects.get(i);
       if (myObj instanceof DroppedItem && colliding(myObj)) {
         DroppedItem item = (DroppedItem) myObj;
         if (item.type == GUN) {
@@ -99,6 +105,7 @@ class player extends GameObject {
       }
     }
   }
+
 
 
 
@@ -129,22 +136,36 @@ class player extends GameObject {
     }
   }
 
+
+
   void movement() {
     v.setMag(speed);
-    if (up) v.y = -speed;
-    if (down) v.y = speed;    
-    if (left) v.x = -speed; 
-    if (right) v.x = speed;
-
-
-    if (abs(v.y) > abs(v.y)) {
-      //if (v.y>=0) curAct = d1;
-      //else curAct = ;
-    } else {
-      if (v.x > 0) curAct = r2;
-      else curAct = l2;
+    v.limit(speed);
+    if (up) {
+      v.y = -speed; 
+      curAct = u1;
     }
-    if (v.x == 0 && v.y == 0) curAct = rest;
+    if (down) {
+      v.y = speed;    
+      curAct = d1;
+    }
+    if (left) {
+      v.x = -speed; 
+      curAct = l1;
+    }
+    if (right) {
+      v.x = speed; 
+      curAct = r1;
+    }
+
+
+    //if (abs(v.y) > abs(v.y)) {
+    //  if (v.y > 0) curAct = d1;
+    //  else curAct = u1;
+    //} else {
+    //  if (v.x > 0) curAct = r1;
+    //  else curAct = l1;
+    //}
 
     if (!up && !down) v.y = 0;
     if (!left && !right) v.x = 0;
@@ -160,5 +181,20 @@ class player extends GameObject {
 
     float x = map(hp, 0, maxHP, 0, 50);
     rect(loc.x-size/2, loc.y-40, x, 4);
+  }
+}
+
+
+void cleanup() {
+  int i = 0;
+  while (i < myObjects.size()) {
+    GameObject obj = myObjects.get(i);
+    if ( obj instanceof bullet || obj instanceof message || obj instanceof ebullet || obj instanceof DroppedItem) {
+      if (obj.roomX != myPlayer.roomX && obj.roomX != myPlayer.roomY) {
+        myObjects.remove(i);
+        i--;
+      }
+    }
+    i++;
   }
 }

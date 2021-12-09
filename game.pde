@@ -1,10 +1,11 @@
 void game() {
 
+  Rb();
   room();
   obj();
   d();
   minimap();
-  hp();
+
   textAlign(CENTER, CENTER);
 
   if (key == 'e' || key == 'E') mode = pause;
@@ -19,6 +20,7 @@ void game() {
 
 
 void room() {
+
 
   rectMode(CENTER);
   strokeWeight(3);
@@ -44,6 +46,9 @@ void room() {
   fill(black);
   rect(width/2, height/2, width*0.8, height*0.8);
   image(floor, width/2, height/2, width*0.8-20, height*0.8-20);
+
+  hp();
+  heal();
 }
 
 
@@ -94,8 +99,62 @@ void minimap() {
   circle(myPlayer.roomX*7+30+size/2, myPlayer.roomY*7+30+size/2, size*0.8);
 }
 
+
 void hp() {
-  textAlign(RIGHT, CENTER);
+  rectMode(CORNER);
   fill(red);
-  text(myPlayer.hp, width-30, 80);
+  rect(84, 550, 100, 15);
+  fill(green);
+  float x = map(myPlayer.hp, 0, myPlayer.maxHP, 0, 100);
+  rect(84, 550, x, 15);
+
+  fill(white);
+  textSize(15);
+  text(myPlayer.hp+"/"+myPlayer.maxHP, 150, 555);
+
+  //  textSize(30);
+  //  text(mouseX + " " + mouseY, 400, 300);
+}
+
+
+void heal() {
+  int y = 0, x = 0; 
+  while (y < 10) {
+    color Rcolor = map.get(x, y);
+
+    if (Rcolor == #000000) {
+      if (myPlayer.roomX == x && myPlayer.roomY == y) {
+        myPlayer.hp++;
+        if (myPlayer.hp>myPlayer.maxHP) myPlayer.hp = myPlayer.maxHP;
+        image(fountain, width/2, height/2, 100, 100);
+      }
+    }
+
+    x++;
+    if (x == 10) {
+      x = 0;
+      y++;
+    }
+  }
+}
+
+void Rb() {
+  int y = 0, x = 0; 
+  while (y < 10) {
+    color Rcolor = map.get(x, y);
+    if (Rcolor == b1) {
+      if (myPlayer.roomX == x && myPlayer.roomY == y) {
+        tint(0, 80, 150);
+        
+        
+      } else {
+        noTint();
+      }
+    }
+    x++;
+    if (x == 10) {
+      x = 0;
+      y++;
+    }
+  }
 }

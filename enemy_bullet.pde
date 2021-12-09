@@ -4,7 +4,7 @@ class ebullet extends GameObject {
   PImage[] g;
   float cc;
 
-  ebullet(float x, float y, PVector aim1, int size1) {
+  ebullet(float x, float y, PVector aim1, int size1, int s) {
     loc = new PVector(x, y);
     aimVector = aim1;
     size = size1;
@@ -13,8 +13,20 @@ class ebullet extends GameObject {
     v.rotate(random(-1, 1));
     roomX = myPlayer.roomX;
     roomY = myPlayer.roomY;
+    speed = s;
+  }
 
-    cc = random(0, 3);
+  ebullet(float x, float y, PVector aim1, int size1, int s, float c) {
+    loc = new PVector(x, y);
+    aimVector = aim1;
+    size = size1;
+    hp = 1;
+    v = new PVector(0, 0);
+    v.rotate(random(-1, 1));
+    roomX = myPlayer.roomX;
+    roomY = myPlayer.roomY;
+    speed = s;
+    cc = c;
   }
 
   void show() {
@@ -26,7 +38,8 @@ class ebullet extends GameObject {
   void act() {
     loc.add(v);
     v.add(aimVector);
-    v.setMag(10);
+    v.setMag(speed);
+    colors();
     explode(10, loc.x, loc.y, 3, 4);
     if (loc.x <= width*0.1 || loc.x >= width*0.9 || loc.y <= height*0.1 || loc.y >= height*0.9) {
       hp = 0;
@@ -39,7 +52,7 @@ class ebullet extends GameObject {
     if (cc>1 && cc<2) x = 2;
     if (cc>2) x = 3;
 
-    explode(10, loc.x, loc.y, 4, x);
+    explode(3, loc.x, loc.y, 4, x);
 
 
     //    explode(10, loc.x, loc.y, 4, 2);

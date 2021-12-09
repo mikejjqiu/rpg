@@ -3,17 +3,24 @@ class DroppedItem extends GameObject {
   int type;
   weapon w;
   color c;
+  float r;
+
 
 
   DroppedItem(float x, float y, int rx, int ry) {
+    r = random(0, 100);
+
 
     float r1 = random(0, 2);
     if (r1 > 1) {
       type = GUN;
       weapons();
     }
+    if (r1 <= 0.5) {
+      type = HEALTH;
+      hh.show(loc.x, loc.y, size);
+    }
 
-    if (r1 <= 0.5) type = HEALTH;
 
     hp = 1;
     loc = new PVector(x, y);
@@ -26,26 +33,43 @@ class DroppedItem extends GameObject {
 
   void show() {
 
-    if (type==GUN)fill(c);
-    else if (type==HEALTH)fill(red);
+    if (type == GUN)fill(c);
+    else if (type == HEALTH) fill(red);
     else noFill();
 
+    noStroke();
     circle(loc.x, loc.y, size);
+
+    if (type == GUN) weapons();
+    if (type == HEALTH) hh.show(loc.x, loc.y, size);
   }
 
 
   void weapons() {
-    float r = random(0, 100);
-    println(r);
-    if (r>=55&&r<=80) w = new fireball();
-    if (r<=15) w = new pistol();
-    if (r>15&&r<30) w = new pewpew();
-    if (r>=30&&r<55) w = new shotgun();
-    if (r>95&&r<=100) w = new fireball1();
-    if (r>80&&r<=95)  w = new fireball2();
-  }
 
-  void weapon() {
-    if (GUN == fireball) fireball.show(loc.x, loc.y, size);
+    if (r>=55&&r<=80) {
+      w = new fireball(); 
+      fireball.show(loc.x, loc.y, size);
+    }
+    if (r<=15) {
+      w = new pistol();
+      pistol.show(loc.x, loc.y, size);
+    }
+    if (r>15&&r<30) {
+      w = new pewpew();
+      pewpew.show(loc.x, loc.y, size);
+    }
+    if (r>=30&&r<55) {
+      w = new shotgun();
+      shotgun.show(loc.x, loc.y, size);
+    }
+    if (r>95&&r<=100) {
+      w = new fireball1(); 
+      fireball1.show(loc.x, loc.y, size);
+    }
+    if (r>80&&r<=95) {
+      w = new fireball2(); 
+      fireball2.show(loc.x, loc.y, size);
+    }
   }
 }

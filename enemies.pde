@@ -42,7 +42,7 @@ class turret extends enemy {
     timer++;
     if (timer==50) {
       PVector aim = new PVector(myPlayer.loc.x-loc.x, myPlayer.loc.y-loc.y);
-      myObjects.add(new ebullet(loc.x-1, loc.y-27, aim, 10));
+      myObjects.add(new ebullet(loc.x-1, loc.y-27, aim, 10, int(random(7, 10))));
       timer = 0;
     }
   }
@@ -64,5 +64,47 @@ class follower extends enemy {
     v.setMag(2);
   }
 }
-//class spawningpool extends enemy {
-//}
+
+
+
+
+
+class boss1 extends enemy {
+
+  int timer = 0;
+  boss1(int x, int y) {
+    super(1000, 200, x, y, 100, 600, 200);
+  }
+
+  void show() {
+    boss1.show1(600, 200, 210, 240);
+  }
+
+  void act() {
+    
+    timer++;
+    if (timer>=50) {
+      if (hp >= 500) {
+        PVector aim = new PVector(myPlayer.loc.x-loc.x, myPlayer.loc.y-loc.y);
+        myObjects.add(new ebullet(loc.x, loc.y, aim, 1, 2, 2.5));
+        timer = 0;
+      }
+
+
+      if (hp<500) {
+        if (timer>2) {
+          for (int i = 0; i < 10; i++) {
+            PVector aim = new PVector(random(-3, 3), random(-3, 3));
+            myObjects.add(new ebullet(loc.x, loc.y, aim, 1, 7, 2.5));
+            aim.rotate(random(-PI, PI));
+
+            timer = 0;
+          }
+        }
+      }
+    }
+    //if (hp > 0) myPlayer.ce = false;
+    //if (hp <= 1) myPlayer.ce = true;
+    super.collision();
+  }
+}
