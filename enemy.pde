@@ -59,7 +59,7 @@ class enemy extends GameObject {
         if (hp<=0) {
           myObjects.add(new DroppedItem(loc.x, loc.y, roomX, roomY));
           myPlayer.xp += xp;
-          myObjects.add(new message(loc, "+"+xp));
+          myObjects.add(new message(loc.x, loc.y , "+"+xp));
         }
       }
     }

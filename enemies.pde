@@ -81,7 +81,7 @@ class boss1 extends enemy {
   }
 
   void act() {
-    
+
     timer++;
     if (timer>=50) {
       if (hp >= 500) {
@@ -106,5 +106,32 @@ class boss1 extends enemy {
     //if (hp > 0) myPlayer.ce = false;
     //if (hp <= 1) myPlayer.ce = true;
     super.collision();
+  }
+}
+
+class boss2 extends enemy {
+  int timer = 0;
+  boss2(int x, int y) {
+    super(2000, 200, x, y, 200, 100, 400);
+  }
+
+  void show() {
+    boss2.show1(100, 400, 150, 220);
+  }
+
+  void act() {
+    super.collision();
+    timer ++;
+    if (timer > 30) {
+      PVector aim = new PVector(myPlayer.loc.x-loc.x, myPlayer.loc.y-loc.y);
+      for (int i = 0; i < 5; i++) myObjects.add(new ebullet(loc.x, loc.y, aim, 0, 10, 1.5));
+      timer = 0;
+    }
+
+    //for (int i = 0; i < myObjects.size(); i++) {
+    //  GameObject myObj = myObjects.get(i);
+    //  if (myObj instanceof ebullet) {
+    //    float d = dist
+    //  }
   }
 }

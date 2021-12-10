@@ -57,6 +57,8 @@ PImage turret, fol1, fol2;
 
 // =====================================
 gif u1, d1, l1, r1;
+gif u2, d2, l2, r2;
+gif u3, d3, l3, r3;
 gif boss1, boss2, boss3;
 
 // ===========================
@@ -64,6 +66,8 @@ images shotgun, fireball, fireball1, fireball2, pewpew, pistol, hh;
 PImage shotgun_, fireball_, fireball1_, fireball2_, pewpew_, pistol_, hh_;
 
 PImage ss, fountain; 
+
+PImage hero1, hero2, hero3;
 
 
 
@@ -89,9 +93,14 @@ void setup() {
   l1 = new gif(3, "hero/hero1/left/", ".png", 8);
   r1 = new gif(3, "hero/hero1/right/", ".png", 8);
 
+  hero1 = loadImage("hero/hero1/down/1.png");
+  //hero2 = loadImage("hero/hero2/down/1.png");
+  hero3 = loadImage("hero/hero3/down/1.png");
+  
+
   boss1 = new gif(5, "boss/boss1/frame_", "_delay-0.1s.png", 5);
-  //boss2 = new gif(5, "boss/boss2/frame_", "_delay-0.18s.png", 5);
-  //boss3 = new gif(16, "boss/boss3/frame_", "_delay-0.1s.png", 5);
+  boss2 = new gif(5, "boss/boss2/frame_", "_delay-0.18s.png", 5);
+  boss3 = new gif(16, "boss/boss3/frame_", "_delay-0.1s.png", 5);
 
   //objs ========================
   myObjects = new ArrayList<GameObject>();
@@ -101,7 +110,7 @@ void setup() {
   //myObjects.add(new enemy());
 
   // mode ====================
-  mode = pause;
+  mode = intro;
 
   // map ========================
   map = loadImage("map1(1).png");
@@ -133,6 +142,10 @@ void setup() {
 
     if (Rcolor == b1) { 
       myObjects.add(new boss1(x, y));
+    }
+
+    if (Rcolor == b2) {
+      myObjects.add(new boss2(x, y));
     }
 
     x++;

@@ -190,7 +190,7 @@ void cleanup() {
   while (i < myObjects.size()) {
     GameObject obj = myObjects.get(i);
     if ( obj instanceof bullet || obj instanceof message || obj instanceof ebullet || obj instanceof DroppedItem) {
-      if (obj.roomX != myPlayer.roomX && obj.roomX != myPlayer.roomY) {
+      if (obj.roomX != myPlayer.roomX && obj.roomY != myPlayer.roomY) {
         myObjects.remove(i);
         i--;
       }

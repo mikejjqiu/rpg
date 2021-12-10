@@ -1,15 +1,13 @@
 class message extends GameObject {
 
-  //float y;
+  message(float x, float y, String t) {
 
-  message(PVector loc, String t) {
-    //int tt = 255;
-    //y = loc.y;
+    hp = 1;
     textSize(50);
     fill(0);
-    text(t, loc.x, loc.y);
+    text(t, x, y);
 
-    loc.y--;
-    //tt--;
+    y--;
+    if (y <= 0) hp = 0;
   }
 }

@@ -52,7 +52,7 @@ class ebullet extends GameObject {
     if (cc>1 && cc<2) x = 2;
     if (cc>2) x = 3;
 
-    explode(3, loc.x, loc.y, 4, x);
+    explode(3, loc.x, loc.y, 2, x);
 
 
     //    explode(10, loc.x, loc.y, 4, 2);

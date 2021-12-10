@@ -9,6 +9,8 @@ void game() {
   textAlign(CENTER, CENTER);
 
   if (key == 'e' || key == 'E') mode = pause;
+  
+  endgame();
 }
 
 
@@ -20,8 +22,6 @@ void game() {
 
 
 void room() {
-
-
   rectMode(CENTER);
   strokeWeight(3);
   fill(mgrey);
@@ -49,6 +49,7 @@ void room() {
 
   hp();
   heal();
+  
 }
 
 
@@ -157,4 +158,8 @@ void Rb() {
       y++;
     }
   }
+}
+
+void endgame() {
+ if (myPlayer.hp <= 0) mode = gameover; 
 }

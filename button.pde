@@ -4,6 +4,7 @@ class Button {
   boolean clicked;
   color highlight, normal;
   String text;
+  PImage hh;
 
   Button(String t, int _x, int _y, int _w, int _h, color norm, color high) {
     x = _x;
@@ -15,6 +16,13 @@ class Button {
     normal = norm;
     clicked = false;
   }
+
+  Button(color c, PImage hh_) {
+    normal = c;
+    clicked = false;
+    hh = hh_;
+  }
+
 
   Button() {
     text = "+";
@@ -46,11 +54,7 @@ class Button {
     fill(255);
     text(text, x, y);
 
-    if (mouseReleased && mouseX > x-w/2 && mouseX < x+w/2 && mouseY > y-h/2 && mouseY < y+h/2) {
-      clicked  = true;
-    } else {
-      clicked = false;
-    }
+    click();
   }
 
   void show1(float x1, float y1, int w1) {
@@ -69,9 +73,26 @@ class Button {
     fill(black);
     textSize(0.8*w1);
     text(text, x1, y1-3);
-
     if (mouseReleased && mouseX > x1-w1/2 && mouseX < x1+w1/2 && mouseY > y1-w1/2 && mouseY < y1+w1/2) clicked  = true;
     else clicked = false;
   }
-  
+
+  void show2(float x1, float y1, float w1, float h1) {
+
+    if (mouseX > x1-w1/2 && mouseX < x1+w1/2 && mouseY > y1-h1/2 && mouseY < y1+h1/2) {
+      fill(#939393);
+      if (mouseReleased) clicked  = true;
+      else clicked = false;
+    } else {
+      fill(normal);
+    }
+
+    rect(x1, y1, w1, h1, 30);
+    image(hh, x1, y1, 0.8*w1, 0.8*h1);
+  }
+
+  void click() {
+    if (mouseReleased && mouseX > x-w/2 && mouseX < x+w/2 && mouseY > y-w/2 && mouseY < y+w/2) clicked  = true;
+    else clicked = false;
+  }
 }
