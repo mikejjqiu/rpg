@@ -68,7 +68,7 @@ PImage shotgun_, fireball_, fireball1_, fireball2_, pewpew_, pistol_, hh_;
 PImage ss, fountain; 
 
 PImage hero1, hero2, hero3;
-
+PImage go;
 
 
 void setup() {
@@ -96,7 +96,7 @@ void setup() {
   hero1 = loadImage("hero/hero1/down/1.png");
   //hero2 = loadImage("hero/hero2/down/1.png");
   hero3 = loadImage("hero/hero3/down/1.png");
-  
+  go = loadImage("go.png");
 
   boss1 = new gif(5, "boss/boss1/frame_", "_delay-0.1s.png", 5);
   boss2 = new gif(5, "boss/boss2/frame_", "_delay-0.18s.png", 5);
@@ -110,7 +110,7 @@ void setup() {
   //myObjects.add(new enemy());
 
   // mode ====================
-  mode = intro;
+  mode = game;
 
   // map ========================
   map = loadImage("map1(1).png");

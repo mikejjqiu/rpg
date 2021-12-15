@@ -8,7 +8,7 @@ class GameObject {
   int xp;
 
   GameObject() {
-    loc = new PVector(width/2, height/2);
+    loc = new PVector(300,200);
     v = new PVector(0, 0);
     hp = 1;
   }

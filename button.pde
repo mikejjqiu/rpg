@@ -1,7 +1,7 @@
 class Button {
 
   int x, y, w, h;
-  boolean clicked;
+  boolean clicked, selected;
   color highlight, normal;
   String text;
   PImage hh;
@@ -19,8 +19,9 @@ class Button {
 
   Button(color c, PImage hh_) {
     normal = c;
-    clicked = false;
     hh = hh_;
+    //clicked = false;
+    //selected = false;
   }
 
 
@@ -79,16 +80,33 @@ class Button {
 
   void show2(float x1, float y1, float w1, float h1) {
 
-    if (mouseX > x1-w1/2 && mouseX < x1+w1/2 && mouseY > y1-h1/2 && mouseY < y1+h1/2) {
-      fill(#939393);
-      if (mouseReleased) clicked  = true;
-      else clicked = false;
-    } else {
-      fill(normal);
-    }
+    if (mouseX > x1 - w1/2 && mouseX < x1 + w1/2 && mouseY > y1 - h1/2 && mouseY < y1 + h1/2) {
+      clicked = true;
+      if (mousePressed) { 
+        selected = true;
+        //print("222");
+        //fill(red);
+      }
+      //else print("111");
+    } else if (mousePressed) selected = false; //else print("333");
+    //  //  print("1");
+    //  //}
+    //} //else { 
+    //clicked = false;
+    //println("out");
+    //if (mouseReleased) {
+    //  selected = false; 
+    //  print("2");
+    //}
+    //}
+
+
+    if (clicked)  fill(black);
+    if (selected) fill(red);
+    //else fill(normal);
 
     rect(x1, y1, w1, h1, 30);
-    image(hh, x1, y1, 0.8*w1, 0.8*h1);
+    //image(hh, x1, y1, 0.8*w1, 0.8*h1);
   }
 
   void click() {

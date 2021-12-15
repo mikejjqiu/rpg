@@ -9,7 +9,7 @@ void game() {
   textAlign(CENTER, CENTER);
 
   if (key == 'e' || key == 'E') mode = pause;
-  
+
   endgame();
 }
 
@@ -49,7 +49,6 @@ void room() {
 
   hp();
   heal();
-  
 }
 
 
@@ -128,6 +127,7 @@ void heal() {
         myPlayer.hp++;
         if (myPlayer.hp>myPlayer.maxHP) myPlayer.hp = myPlayer.maxHP;
         image(fountain, width/2, height/2, 100, 100);
+        no_trespassing();
       }
     }
 
@@ -146,8 +146,6 @@ void Rb() {
     if (Rcolor == b1) {
       if (myPlayer.roomX == x && myPlayer.roomY == y) {
         tint(0, 80, 150);
-        
-        
       } else {
         noTint();
       }
@@ -161,5 +159,12 @@ void Rb() {
 }
 
 void endgame() {
- if (myPlayer.hp <= 0) mode = gameover; 
+  if (myPlayer.hp <= 0) mode = gameover;
+}
+
+void no_trespassing() {
+  float d = dist(myPlayer.loc.x, myPlayer.loc.y, width/2, height/2);
+  if (d<=60) {
+    //if(pmouseX
+  }
 }

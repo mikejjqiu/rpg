@@ -45,11 +45,11 @@ class shotgun extends weapon {
   }
   void shoot() {
     if (shottimer >= threshold) {
-      for (int i = 0; i < 20; i++) {
+      for (int i = 0; i < 30; i++) {
         PVector aim = new PVector(mouseX-myPlayer.loc.x,mouseY-myPlayer.loc.y);
         aim.setMag(bulletspeed);
         myObjects.add(new bullet(aim, mgreen, 5));
-        aim.rotate(random(-0.2,0.2));
+        aim.rotate(random(-0.1,0.1));
       }
       shottimer = 0;
     }
